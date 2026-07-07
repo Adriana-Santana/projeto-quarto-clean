@@ -55,3 +55,49 @@ for movel in dados_paredes:
     print(f"📌 O móvel '{nome_do_movel}' foi alocado na: {parede_do_movel}")
     # Fechando a conexão no final de tudo
 conexao.close()
+
+# =================================================================
+# PROJETO: GASTOS DA REFORMA DO QUARTO
+# ----------------------------------------------------
+import sqlite3
+
+# 1. Conecta no banco de dados do seu quarto
+conexao_quarto = sqlite3.connect("meu_quarto_v2.db")
+cursor_quarto = conexao_quarto.cursor()
+
+# 2. Cria a tabela se ela não existir
+cursor_quarto.execute("""
+CREATE TABLE IF NOT EXISTS gastos_reforma (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item TEXT NOT NULL,
+    valor REAL NOT NULL,
+    local_compra TEXT NOT NULL
+)
+""")
+conexao_quarto.commit()
+
+# 3. MOSTRAR OS GASTOS NA TELA (Sumiu com o ID 0 fantasma!)
+print("\n--- GASTOS DA REFORMA SALVOS NO BANCO ---")
+cursor_quarto.execute("SELECT * FROM gastos_reforma WHERE item IS NOT NULL AND item != ''")
+linhas = cursor_quarto.fetchall()
+
+for linha in linhas:
+    print(f"ID: {linha[0]} | Item: {linha[1]} | Valor: R$ {linha[2]:.2f} | Local: {linha[3]}")
+
+# 4. CALCULA E MOSTRA O TOTAL DE GASTOS AUTOMATICAMENTE
+cursor_quarto.execute("SELECT SUM(valor) FROM gastos_reforma WHERE item IS NOT NULL AND item != ''")
+total = cursor_quarto.fetchone()[0]
+
+if total is None:
+    total = 0.0
+
+# 5. TESTANDO AS PERGUNTAS NO TERMINAL
+print("\n--- CADASTRO DE NOVO ITEM (TESTE) ---")
+
+novo_item = input("O que você comprou para o quarto? ")
+novo_valor = input("Quanto custou? R$ ")
+novo_local = input("Onde você comprou? ")
+cursor_quarto.execute("INSERT INTO gastos_reforma (item, valor, local_compra) VALUES (?, ?, ?)", (novo_item, novo_valor, novo_local))
+conexao_quarto.commit()
+# Fecha a conexão com segurança
+conexao_quarto.close()
