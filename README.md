@@ -1,19 +1,26 @@
-# 🛏️ Projeto Cálculo do Quarto - Versão 2.0
+# Projeto Quarto Clean - Espaço e Gastos
 
-Este é um projeto desenvolvido em **Python** integrado com um banco de dados **SQLite**. O sistema foi criado para ajudar no planejamento de uma reforma de quarto, calculando a ocupação de espaço nas paredes e organizando onde cada móvel será alocado.
+Este projeto foi feito em Python e SQLite para me ajudar a planejar a reforma do meu quarto. Ele junta duas partes importantes: calcular o espaço dos móveis nas paredes e organizar os gastos das compras.
 
-## 🚀 Funcionalidades
-- **Criação de Banco de Dados:** Criação automática da tabela de móveis usando `CREATE TABLE IF NOT EXISTS`.
-- **Limpeza Automática:** Sistema inteligente que limpa os dados antigos com `DELETE FROM` antes de rodar, evitando registros duplicados.
-- **Cálculo de Espaço:** Soma a largura de todos os móveis e valida se eles ultrapassam o limite disponível na parede principal.
-- **Relatório de Paredes:** Varre o banco de dados usando `SELECT` e exibe um relatório organizado mostrando em qual parede (A, B ou C) cada móvel foi planejado.
+## O que o programa faz
 
-## 🛠️ Tecnologias Utilizadas
-- **Python 3**
-- **SQLite3** (Banco de dados relacional leve)
+### 1. Cálculo de Espaço e Móveis
+* Organiza os móveis (cama, guarda-roupa e TV) por paredes.
+* Soma a largura dos móveis e verifica se eles cabem no espaço disponível de 2,90m.
+* Mostra no terminal se o espaço é suficiente ou se ultrapassa o limite.
 
-## 📌 Aprendizados (Faculdade & Portfólio)
-Nesta versão do projeto, os principais conceitos aplicados foram:
-1. Conexão e manipulação de bancos de dados via código.
-2. Comandos SQL essenciais: `CREATE`, `INSERT`, `DELETE` e `SELECT`.
-3. Estruturas de repetição (`for`) em Python para gerar relatórios dinâmicos a partir de dados do banco.
+### 2. Controle dos Gastos da Reforma
+* Guarda os itens comprados, o valor e o local da compra no banco de dados.
+* Calcula o valor total gasto de forma automática usando SQL.
+* Permite cadastrar novos itens direto pelo terminal.
+
+## Tecnologias Usadas
+
+* Python 3
+* SQLite3
+
+## O que eu pratiquei nesse projeto
+
+* Conexão e comandos de banco de dados (CREATE, INSERT, SELECT, DELETE, SUM).
+* Uso de estruturas de repetição (for) para ler as informações do banco.
+* Lógica de programação para comparar o tamanho dos móveis com o espaço da parede.
